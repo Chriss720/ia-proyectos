@@ -1,0 +1,51 @@
+{
+  "name": "rnn-keras-autocomplete",
+  "displayName": "RNN Keras Autocomplete",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:c",
+    "onLanguage:cpp"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "rnnKeras.complete",
+        "title": "RNN: completar línea"
+      },
+      {
+        "command": "rnnKeras.suggest",
+        "title": "RNN: elegir sugerencia"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "rnnKeras.complete",
+        "key": "ctrl+shift+space",
+        "when": "editorTextFocus && (editorLangId == c || editorLangId == cpp)"
+      }
+    ],
+    "configuration": {
+      "properties": {
+        "rnnKeras.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Comando o ruta absoluta al ejecutable de Python (ej: python o python3)"
+        },
+        "rnnKeras.serverScript": {
+          "type": "string",
+          "default": "",
+          "description": "Ruta absoluta a server_stdio.py"
+        },
+        "rnnKeras.maxNew": {
+          "type": "number",
+          "default": 60,
+          "description": "Número máximo de caracteres nuevos a generar"
+        }
+      }
+    }
+  }
+}

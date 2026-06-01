@@ -1,0 +1,13 @@
+{
+  "rnnKeras.pythonPath": "C:\\Users\\crist\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+  "rnnKeras.serverScript": "c:\\Users\\crist\\Desktop\\TEC\\Semestre_9\\IA\\Proyectos-IA\\Proyecto3\\rnn-keras-autocomplete\\server_stdio.py",
+  "rnnKeras.maxNew": 60,
+  "editor.quickSuggestions": {
+    "other": "off",
+    "comments": "off",
+    "strings": "off"
+  },
+  "editor.inlineSuggest.enabled": false,
+  "editor.suggestOnTriggerCharacters": false,
+  "workbench.editor.empty.hint": false
+}

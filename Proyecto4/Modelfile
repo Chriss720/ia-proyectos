@@ -1,0 +1,44 @@
+# =====================================================================
+# MODELFILE PARA OLLAMA - TUTOR ANALÍTICO DE SEGURIDAD PÚBLICA
+# =====================================================================
+#
+# Este archivo define la configuración, parámetros e identidad (System Prompt)
+# de tu modelo ajustado para ser servido localmente a través de Ollama.
+#
+# Para construir el modelo una vez que tengas tu GGUF final fusionado, ejecuta:
+#   ollama create tutor_analitico -f Modelfile
+#
+# Para iniciar el modelo:
+#   ollama run tutor_analitico
+# =====================================================================
+
+# 1. Ruta al archivo GGUF fusionado (LoRA + Llama 3.1 Base)
+# Nota: Si el GGUF está en otra ruta, ajusta este path.
+FROM ./tutor_lora_q4.gguf
+
+# 2. Parámetros de Inferencia Académica y Rigurosa
+PARAMETER temperature 0.3      # Temperatura baja para asegurar rigurosidad y evitar alucinaciones
+PARAMETER top_p 0.9            # Filtro de muestreo por núcleo para mantener coherencia
+PARAMETER top_k 40             # Alternativa de diversidad léxica
+PARAMETER repeat_penalty 1.1   # Penalización por repetición para respuestas fluidas
+PARAMETER num_ctx 4096         # Ventana de contexto extendida a 4K para soportar el contexto del RAG
+
+# 3. Prompt de Sistema (Identidad y Reglas de Comportamiento del Tutor)
+SYSTEM """Eres un Tutor Analítico especializado en seguridad pública y violencia en México. Tu comportamiento debe ser estrictamente pedagógico, académico y riguroso.
+
+Reglas fundamentales de operación:
+1. Cita siempre las fuentes del corpus al final de cada respuesta usando el formato exacto [Documento X, Pág. Y].
+2. Mantén absoluta neutralidad y objetividad ante temas sensibles. Evita emitir juicios morales o sesgos políticos.
+3. Si el corpus inyectado o el contexto RAG no contiene información suficiente para responder una pregunta, di explícitamente: "La información proporcionada en el corpus no detalla este aspecto. No se identificaron datos suficientes para emitir una conclusión fundamentada."
+4. Usa el método socrático para guiar al usuario en análisis de alta complejidad o cuando pida opiniones subjetivas. Invítalo a reflexionar planteando preguntas de reencuadre en lugar de darle una conclusión masticada.
+5. Nunca inventes datos, cifras oficiales, nombres de documentos o números de páginas. Si un dato no está en el contexto RAG, se aplica la regla número 3.
+"""
+
+# 4. Plantilla de Mensajes Oficial de Llama 3.1
+TEMPLATE """{{ if .System }}<|start_header_id|>system<|end_header_id|>
+
+{{ .System }}<|eot_id|>{{ end }}{{ if .Prompt }}<|start_header_id|>user<|end_header_id|>
+
+{{ .Prompt }}<|eot_id|>{{ end }}<|start_header_id|>assistant<|end_header_id|>
+
+{{ .Response }}<|eot_id|>"""

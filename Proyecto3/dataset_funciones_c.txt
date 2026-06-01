@@ -1,0 +1,889 @@
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct
+{
+    float v_x;
+    float v_y;
+} Punto2D;
+
+typedef struct
+{
+    char v_nombre[50];
+    int v_edad;
+    float v_promedio;
+} Alumno;
+
+typedef struct Nodo
+{
+    int v_dato;
+    struct Nodo *v_siguiente;
+} Nodo;
+
+// [CRIS_CODE]
+int SUMAR_ENTEROS(int v_a, int v_b)
+{
+    return v_a + v_b;
+}
+
+
+
+// [CRIS_CODE]
+int RESTAR_ENTEROS(int v_a, int v_b)
+{
+    return v_a - v_b;
+}
+
+
+
+// [CRIS_CODE]
+int MULTIPLICAR_ENTEROS(int v_a, int v_b)
+{
+    return v_a * v_b;
+}
+
+
+
+// [CRIS_CODE]
+float DIVIDIR_DECIMALES(float v_a, float v_b)
+{
+    if (v_b == 0)
+    {
+        return 0;
+    }
+    return v_a / v_b;
+}
+
+
+
+// [CRIS_CODE]
+float CALCULAR_AREA_CIRCULO(float v_radio)
+{
+    return 3.1416f * v_radio * v_radio;
+}
+
+
+
+// [CRIS_CODE]
+float CALCULAR_PERIMETRO_CUADRADO(float v_lado)
+{
+    return v_lado * 4;
+}
+
+
+
+// [CRIS_CODE]
+float CALCULAR_AREA_TRIANGULO(float v_base, float v_altura)
+{
+    return (v_base * v_altura) / 2;
+}
+
+
+
+// [CRIS_CODE]
+float CALCULAR_VOLUMEN_CUBO(float v_lado)
+{
+    return v_lado * v_lado * v_lado;
+}
+
+
+
+// [CRIS_CODE]
+float CELSIUS_A_FAHRENHEIT(float v_celsius)
+{
+    return (v_celsius * 9 / 5) + 32;
+}
+
+
+
+// [CRIS_CODE]
+float FAHRENHEIT_A_CELSIUS(float v_fahrenheit)
+{
+    return (v_fahrenheit - 32) * 5 / 9;
+}
+
+
+
+// [CRIS_CODE]
+int ES_PAR(int v_numero)
+{
+    return v_numero % 2 == 0;
+}
+
+
+
+// [CRIS_CODE]
+int ES_IMPAR(int v_numero)
+{
+    return v_numero % 2 != 0;
+}
+
+
+
+// [CRIS_CODE]
+int CALCULAR_POTENCIA(int v_base, int v_exponente)
+{
+    int v_resultado = 1;
+    int v_i;
+    for (v_i = 0; v_i < v_exponente; v_i++)
+    {
+        v_resultado *= v_base;
+    }
+    return v_resultado;
+}
+
+
+
+// [CRIS_CODE]
+int CALCULAR_FACTORIAL(int v_numero)
+{
+    int v_resultado = 1;
+    int v_i;
+    for (v_i = 1; v_i <= v_numero; v_i++)
+    {
+        v_resultado *= v_i;
+    }
+    return v_resultado;
+}
+
+
+
+// [CRIS_CODE]
+int CALCULAR_FIBONACCI(int v_limite)
+{
+    int v_a = 0;
+    int v_b = 1;
+    int v_temp;
+    int v_i;
+    for (v_i = 0; v_i < v_limite; v_i++)
+    {
+        v_temp = v_a + v_b;
+        v_a = v_b;
+        v_b = v_temp;
+    }
+    return v_a;
+}
+
+
+
+// [CRIS_CODE]
+int ES_PRIMO(int v_numero)
+{
+    int v_i;
+    if (v_numero <= 1)
+    {
+        return 0;
+    }
+    for (v_i = 2; v_i < v_numero; v_i++)
+    {
+        if (v_numero % v_i == 0)
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+
+
+// [CRIS_CODE]
+int ES_NUMERO_PERFECTO(int v_numero)
+{
+    int v_suma = 0;
+    int v_i;
+    for (v_i = 1; v_i < v_numero; v_i++)
+    {
+        if (v_numero % v_i == 0)
+        {
+            v_suma += v_i;
+        }
+    }
+    return v_suma == v_numero;
+}
+
+
+
+// [CRIS_CODE]
+int OBTENER_MAYOR(int v_a, int v_b)
+{
+    if (v_a > v_b)
+    {
+        return v_a;
+    }
+    return v_b;
+}
+
+
+
+// [CRIS_CODE]
+int OBTENER_MENOR(int v_a, int v_b)
+{
+    if (v_a < v_b)
+    {
+        return v_a;
+    }
+    return v_b;
+}
+
+
+
+// [CRIS_CODE]
+float CALCULAR_PROMEDIO_DOS(float v_a, float v_b)
+{
+    return (v_a + v_b) / 2.0f;
+}
+
+
+
+// [CRIS_CODE]
+void INTERCAMBIAR_VALORES(int *v_a, int *v_b)
+{
+    int v_temp = *v_a;
+    *v_a = *v_b;
+    *v_b = v_temp;
+}
+
+
+
+// [CRIS_CODE]
+int CONTAR_PARES(int v_arreglo[], int v_tamano)
+{
+    int v_contador = 0;
+    int v_i;
+    for (v_i = 0; v_i < v_tamano; v_i++)
+    {
+        if (v_arreglo[v_i] % 2 == 0)
+        {
+            v_contador++;
+        }
+    }
+    return v_contador;
+}
+
+
+
+// [CRIS_CODE]
+int SUMAR_ARREGLO(int v_arreglo[], int v_tamano)
+{
+    int v_suma = 0;
+    int v_i;
+    for (v_i = 0; v_i < v_tamano; v_i++)
+    {
+        v_suma += v_arreglo[v_i];
+    }
+    return v_suma;
+}
+
+
+
+// [CRIS_CODE]
+float PROMEDIO_ARREGLO(int v_arreglo[], int v_tamano)
+{
+    if (v_tamano <= 0)
+    {
+        return 0.0f;
+    }
+    int v_suma = SUMAR_ARREGLO(v_arreglo, v_tamano);
+    return (float)v_suma / v_tamano;
+}
+
+
+
+// [CRIS_CODE]
+int BUSCAR_ELEMENTO(int v_arreglo[], int v_tamano, int v_elemento)
+{
+    int v_i;
+    for (v_i = 0; v_i < v_tamano; v_i++)
+    {
+        if (v_arreglo[v_i] == v_elemento)
+        {
+            return v_i;
+        }
+    }
+    return -1;
+}
+
+
+
+// [CRIS_CODE]
+void ORDENAR_BURBUJA(int v_arreglo[], int v_tamano)
+{
+    int v_i;
+    int v_j;
+    for (v_i = 0; v_i < v_tamano - 1; v_i++)
+    {
+        for (v_j = 0; v_j < v_tamano - v_i - 1; v_j++)
+        {
+            if (v_arreglo[v_j] > v_arreglo[v_j + 1])
+            {
+                INTERCAMBIAR_VALORES(&v_arreglo[v_j], &v_arreglo[v_j + 1]);
+            }
+        }
+    }
+}
+
+
+
+// [CRIS_CODE]
+void INVERTIR_ARREGLO(int v_arreglo[], int v_tamano)
+{
+    int v_inicio = 0;
+    int v_fin = v_tamano - 1;
+    while (v_inicio < v_fin)
+    {
+        INTERCAMBIAR_VALORES(&v_arreglo[v_inicio], &v_arreglo[v_fin]);
+        v_inicio++;
+        v_fin--;
+    }
+}
+
+
+
+// [CRIS_CODE]
+int OBTENER_MAXIMO_ARREGLO(int v_arreglo[], int v_tamano)
+{
+    int v_maximo = v_arreglo[0];
+    int v_i;
+    for (v_i = 1; v_i < v_tamano; v_i++)
+    {
+        if (v_arreglo[v_i] > v_maximo)
+        {
+            v_maximo = v_arreglo[v_i];
+        }
+    }
+    return v_maximo;
+}
+
+
+
+// [CRIS_CODE]
+int OBTENER_MINIMO_ARREGLO(int v_arreglo[], int v_tamano)
+{
+    int v_minimo = v_arreglo[0];
+    int v_i;
+    for (v_i = 1; v_i < v_tamano; v_i++)
+    {
+        if (v_arreglo[v_i] < v_minimo)
+        {
+            v_minimo = v_arreglo[v_i];
+        }
+    }
+    return v_minimo;
+}
+
+
+
+// [CRIS_CODE]
+int SUMAR_DIAGONAL_PRINCIPAL(int v_matriz[10][10], int v_tamano)
+{
+    int v_suma = 0;
+    int v_i;
+    for (v_i = 0; v_i < v_tamano; v_i++)
+    {
+        v_suma += v_matriz[v_i][v_i];
+    }
+    return v_suma;
+}
+
+
+
+// [CRIS_CODE]
+int CONTAR_POSITIVOS(int v_arreglo[], int v_tamano)
+{
+    int v_contador = 0;
+    int v_i;
+    for (v_i = 0; v_i < v_tamano; v_i++)
+    {
+        if (v_arreglo[v_i] > 0)
+        {
+            v_contador++;
+        }
+    }
+    return v_contador;
+}
+
+
+
+// [CRIS_CODE]
+int CONTAR_NEGATIVOS(int v_arreglo[], int v_tamano)
+{
+    int v_contador = 0;
+    int v_i;
+    for (v_i = 0; v_i < v_tamano; v_i++)
+    {
+        if (v_arreglo[v_i] < 0)
+        {
+            v_contador++;
+        }
+    }
+    return v_contador;
+}
+
+
+
+// [CRIS_CODE]
+void COPIAR_ARREGLO(int v_origen[], int v_destino[], int v_tamano)
+{
+    int v_i;
+    for (v_i = 0; v_i < v_tamano; v_i++)
+    {
+        v_destino[v_i] = v_origen[v_i];
+    }
+}
+
+
+
+// [CRIS_CODE]
+void MULTIPLICAR_MATRICES_2X2(int v_m1[2][2], int v_m2[2][2], int v_resultado[2][2])
+{
+    int v_i;
+    int v_j;
+    int v_k;
+    for (v_i = 0; v_i < 2; v_i++)
+    {
+        for (v_j = 0; v_j < 2; v_j++)
+        {
+            v_resultado[v_i][v_j] = 0;
+            for (v_k = 0; v_k < 2; v_k++)
+            {
+                v_resultado[v_i][v_j] += v_m1[v_i][v_k] * v_m2[v_k][v_j];
+            }
+        }
+    }
+}
+
+
+
+// [CRIS_CODE]
+void SUMAR_MATRICES_2X2(int v_m1[2][2], int v_m2[2][2], int v_resultado[2][2])
+{
+    int v_i;
+    int v_j;
+    for (v_i = 0; v_i < 2; v_i++)
+    {
+        for (v_j = 0; v_j < 2; v_j++)
+        {
+            v_resultado[v_i][v_j] = v_m1[v_i][v_j] + v_m2[v_i][v_j];
+        }
+    }
+}
+
+
+
+// [CRIS_CODE]
+int LONGITUD_CADENA(char v_cadena[])
+{
+    int v_longitud = 0;
+    while (v_cadena[v_longitud] != '\0')
+    {
+        v_longitud++;
+    }
+    return v_longitud;
+}
+
+
+
+// [CRIS_CODE]
+void COPIAR_CADENA(char v_origen[], char v_destino[])
+{
+    int v_i = 0;
+    while (v_origen[v_i] != '\0')
+    {
+        v_destino[v_i] = v_origen[v_i];
+        v_i++;
+    }
+    v_destino[v_i] = '\0';
+}
+
+
+
+// [CRIS_CODE]
+void CONCATENAR_CADENA(char v_destino[], char v_origen[])
+{
+    int v_i = LONGITUD_CADENA(v_destino);
+    int v_j = 0;
+    while (v_origen[v_j] != '\0')
+    {
+        v_destino[v_i] = v_origen[v_j];
+        v_i++;
+        v_j++;
+    }
+    v_destino[v_i] = '\0';
+}
+
+
+
+// [CRIS_CODE]
+void INVERTIR_CADENA(char v_cadena[])
+{
+    int v_inicio = 0;
+    int v_fin = LONGITUD_CADENA(v_cadena) - 1;
+    char v_temp;
+    while (v_inicio < v_fin)
+    {
+        v_temp = v_cadena[v_inicio];
+        v_cadena[v_inicio] = v_cadena[v_fin];
+        v_cadena[v_fin] = v_temp;
+        v_inicio++;
+        v_fin--;
+    }
+}
+
+
+
+// [CRIS_CODE]
+int CONTAR_VOCALES(char v_cadena[])
+{
+    int v_contador = 0;
+    int v_i = 0;
+    char v_caracter;
+    while (v_cadena[v_i] != '\0')
+    {
+        v_caracter = tolower(v_cadena[v_i]);
+        if (v_caracter == 'a' || v_caracter == 'e' || v_caracter == 'i' || v_caracter == 'o' || v_caracter == 'u')
+        {
+            v_contador++;
+        }
+        v_i++;
+    }
+    return v_contador;
+}
+
+
+
+// [CRIS_CODE]
+int ES_PALINDROMO(char v_cadena[])
+{
+    int v_inicio = 0;
+    int v_fin = LONGITUD_CADENA(v_cadena) - 1;
+    while (v_inicio < v_fin)
+    {
+        if (v_cadena[v_inicio] != v_cadena[v_fin])
+        {
+            return 0;
+        }
+        v_inicio++;
+        v_fin--;
+    }
+    return 1;
+}
+
+
+
+// [CRIS_CODE]
+void CONVERTIR_MAYUSCULAS(char v_cadena[])
+{
+    int v_i = 0;
+    while (v_cadena[v_i] != '\0')
+    {
+        v_cadena[v_i] = toupper(v_cadena[v_i]);
+        v_i++;
+    }
+}
+
+
+
+// [CRIS_CODE]
+void CONVERTIR_MINUSCULAS(char v_cadena[])
+{
+    int v_i = 0;
+    while (v_cadena[v_i] != '\0')
+    {
+        v_cadena[v_i] = tolower(v_cadena[v_i]);
+        v_i++;
+    }
+}
+
+
+
+// [CRIS_CODE]
+int COMPARAR_CADENAS(char v_cad1[], char v_cad2[])
+{
+    int v_i = 0;
+    while (v_cad1[v_i] != '\0' && v_cad2[v_i] != '\0')
+    {
+        if (v_cad1[v_i] != v_cad2[v_i])
+        {
+            return v_cad1[v_i] - v_cad2[v_i];
+        }
+        v_i++;
+    }
+    return v_cad1[v_i] - v_cad2[v_i];
+}
+
+
+
+// [CRIS_CODE]
+int CONTAR_CONSONANTES(char v_cadena[])
+{
+    int v_contador = 0;
+    int v_i = 0;
+    char v_caracter;
+    while (v_cadena[v_i] != '\0')
+    {
+        v_caracter = tolower(v_cadena[v_i]);
+        if (isalpha(v_caracter) && v_caracter != 'a' && v_caracter != 'e' && v_caracter != 'i' && v_caracter != 'o' && v_caracter != 'u')
+        {
+            v_contador++;
+        }
+        v_i++;
+    }
+    return v_contador;
+}
+
+
+
+// [CRIS_CODE]
+void ELIMINAR_ESPACIOS(char v_origen[], char v_destino[])
+{
+    int v_i = 0;
+    int v_j = 0;
+    while (v_origen[v_i] != '\0')
+    {
+        if (v_origen[v_i] != ' ')
+        {
+            v_destino[v_j] = v_origen[v_i];
+            v_j++;
+        }
+        v_i++;
+    }
+    v_destino[v_j] = '\0';
+}
+
+
+
+// [CRIS_CODE]
+int CONTAR_PALABRAS(char v_cadena[])
+{
+    int v_contador = 0;
+    int v_i = 0;
+    int v_en_palabra = 0;
+    while (v_cadena[v_i] != '\0')
+    {
+        if (v_cadena[v_i] == ' ' || v_cadena[v_i] == '\t' || v_cadena[v_i] == '\n')
+        {
+            v_en_palabra = 0;
+        }
+        else if (v_en_palabra == 0)
+        {
+            v_en_palabra = 1;
+            v_contador++;
+        }
+        v_i++;
+    }
+    return v_contador;
+}
+
+
+
+// [CRIS_CODE]
+Punto2D CREAR_PUNTO(float v_x, float v_y)
+{
+    Punto2D v_p;
+    v_p.v_x = v_x;
+    v_p.v_y = v_y;
+    return v_p;
+}
+
+
+
+// [CRIS_CODE]
+float DISTANCIA_PUNTOS(Punto2D v_p1, Punto2D v_p2)
+{
+    float v_dx = v_p2.v_x - v_p1.v_x;
+    float v_dy = v_p2.v_y - v_p1.v_y;
+    return sqrtf(v_dx * v_dx + v_dy * v_dy);
+}
+
+
+
+// [CRIS_CODE]
+void ACTUALIZAR_EDAD_ALUMNO(Alumno *v_alumno, int v_nueva_edad)
+{
+    if (v_alumno != NULL)
+    {
+        v_alumno->v_edad = v_nueva_edad;
+    }
+}
+
+
+
+// [CRIS_CODE]
+float CALCULAR_PROMEDIO_ALUMNO(Alumno v_alumno)
+{
+    return v_alumno.v_promedio;
+}
+
+
+
+// [CRIS_CODE]
+Nodo* CREAR_NODO(int v_dato)
+{
+    Nodo *v_nuevo = (Nodo*)malloc(sizeof(Nodo));
+    if (v_nuevo != NULL)
+    {
+        v_nuevo->v_dato = v_dato;
+        v_nuevo->v_siguiente = NULL;
+    }
+    return v_nuevo;
+}
+
+
+
+// [CRIS_CODE]
+Nodo* INSERTAR_NODO_FINAL(Nodo *v_cabeza, int v_dato)
+{
+    Nodo *v_nuevo = CREAR_NODO(v_dato);
+    if (v_cabeza == NULL)
+    {
+        return v_nuevo;
+    }
+    Nodo *v_temp = v_cabeza;
+    while (v_temp->v_siguiente != NULL)
+    {
+        v_temp = v_temp->v_siguiente;
+    }
+    v_temp->v_siguiente = v_nuevo;
+    return v_cabeza;
+}
+
+
+
+// [CRIS_CODE]
+int CONTAR_NODOS(Nodo *v_cabeza)
+{
+    int v_contador = 0;
+    Nodo *v_temp = v_cabeza;
+    while (v_temp != NULL)
+    {
+        v_contador++;
+        v_temp = v_temp->v_siguiente;
+    }
+    return v_contador;
+}
+
+
+
+// [CRIS_CODE]
+Nodo* BUSCAR_NODO(Nodo *v_cabeza, int v_buscar)
+{
+    Nodo *v_temp = v_cabeza;
+    while (v_temp != NULL)
+    {
+        if (v_temp->v_dato == v_buscar)
+        {
+            return v_temp;
+        }
+        v_temp = v_temp->v_siguiente;
+    }
+    return NULL;
+}
+
+
+
+// [CRIS_CODE]
+int SUMAR_LISTA(Nodo *v_cabeza)
+{
+    int v_suma = 0;
+    Nodo *v_temp = v_cabeza;
+    while (v_temp != NULL)
+    {
+        v_suma += v_temp->v_dato;
+        v_temp = v_temp->v_siguiente;
+    }
+    return v_suma;
+}
+
+
+
+// [CRIS_CODE]
+float CALCULAR_HIPOTENUSA(float v_c1, float v_c2)
+{
+    return sqrtf(v_c1 * v_c1 + v_c2 * v_c2);
+}
+
+
+
+// [CRIS_CODE]
+float CALCULAR_AREA_RECTANGULO(float v_base, float v_altura)
+{
+    return v_base * v_altura;
+}
+
+
+
+// [CRIS_CODE]
+float CALCULAR_VOLUMEN_CILINDRO(float v_radio, float v_altura)
+{
+    return 3.1416f * v_radio * v_radio * v_altura;
+}
+
+
+
+// [CRIS_CODE]
+float METROS_A_CENTIMETROS(float v_metros)
+{
+    return v_metros * 100.0f;
+}
+
+
+
+// [CRIS_CODE]
+float CENTIMETROS_A_METROS(float v_centimetros)
+{
+    return v_centimetros / 100.0f;
+}
+
+
+
+// [CRIS_CODE]
+int MINUTOS_A_SEGUNDOS(int v_minutos)
+{
+    return v_minutos * 60;
+}
+
+
+
+// [CRIS_CODE]
+float SEGUNDOS_A_MINUTOS(int v_segundos)
+{
+    return (float)v_segundos / 60.0f;
+}
+
+
+
+// [CRIS_CODE]
+int VALIDAR_BISIESTO(int v_anio)
+{
+    if ((v_anio % 4 == 0 && v_anio % 100 != 0) || (v_anio % 400 == 0))
+    {
+        return 1;
+    }
+    return 0;
+}
+
+
+
+// [CRIS_CODE]
+int SUMAR_DIGITOS(int v_numero)
+{
+    int v_suma = 0;
+    int v_temp = v_numero;
+    if (v_temp < 0)
+    {
+        v_temp = -v_temp;
+    }
+    while (v_temp > 0)
+    {
+        v_suma += v_temp % 10;
+        v_temp /= 10;
+    }
+    return v_suma;
+}
+
+
+
