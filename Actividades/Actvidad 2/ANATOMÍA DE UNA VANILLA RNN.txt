@@ -1,0 +1,101 @@
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+             ACTIVIDAD 2: EL ENIGMA DEL ORÁCULO SECUENCIAL:
+                      ANATOMÍA DE UNA VANILLA RNN
+
+                            Eduardo Alcaraz
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+Table of Contents
+─────────────────
+
+1. 1. El Acertijo: El Guardián del Tiempo
+2. 2. Actividades de Comprensión (Para el Alumno)
+.. 1. Actividad 2.1: Mapeo de Variables
+.. 2. Actividad 2.2: El Análisis de Dimensionalidad (El tamaño de los peajes)
+.. 3. Actividad 2.3: La Estrofa Perdida (Pensamiento Lateral)
+
+
+1 1. El Acertijo: El Guardián del Tiempo
+════════════════════════════════════════
+
+  Lee atentamente las siguientes líneas. Cada estrofa describe un
+  componente matemático exacto de una celda recurrente básica. ¿Puedes
+  identificar a qué variable, matriz o función se refiere cada una antes
+  de leer la disección?
+
+        Soy la novedad pura, el pulso del instante, la matriz de
+        características que el mundo me da en este segundo.
+
+        Pero soy ciego sin mi compañero, el fantasma del pasado,
+        que trae consigo el resumen de todo lo que hemos vivido
+        hasta ayer.
+
+        Para unirnos, cruzamos por peajes inmutables, barreras que
+        multiplican nuestra importancia y deciden qué tanto
+        valemos.
+
+        Juntos, sumados a un pequeño desvío inevitable, chocamos
+        contra un muro curvo que nos comprime entre el -1 y el 1,
+        evitando que nuestra energía explote hacia el infinito.
+
+        Al salir de esa curva, nazco yo, una nueva identidad.  Soy
+        tu estado actual, la respuesta de hoy, y estoy listo para
+        ser el fantasma de tu mañana.
+
+
+2 2. Actividades de Comprensión (Para el Alumno)
+════════════════════════════════════════════════
+
+  Antes de avanzar a la disección analítica, resuelve los siguientes
+  retos para poner a prueba tu intuición matemática sobre la
+  arquitectura del modelo.
+
+
+2.1 Actividad 2.1: Mapeo de Variables
+─────────────────────────────────────
+
+  Dada la ecuación fundamental de la Vanilla RNN: $$h_t = \tanh(W_{hx}
+  x_t + W_{hh} h_{t-1} + b)$$
+
+  Identifica y escribe la frase exacta del poema que hace referencia a
+  cada uno de los siguientes componentes matemáticos:
+  $x_t$
+        ______________________________________________________________
+  $h_{t-1}$
+        __________________________________________________________
+  $W_{hx}, W_{hh}$
+        ___________________________________________________
+  $b$
+        ________________________________________________________________
+  $\tanh$
+        ____________________________________________________________
+  $h_t$
+        ______________________________________________________________
+
+
+2.2 Actividad 2.2: El Análisis de Dimensionalidad (El tamaño de los peajes)
+───────────────────────────────────────────────────────────────────────────
+
+  Supón que estás diseñando esta red para procesar secuencias de
+  datos. Si la "novedad pura" ($x_t$) es un vector de entrada con
+  características de dimensión $\mathbb{R}^{20}$ y decides que el
+  "fantasma del pasado" ($h_{t-1}$) requiere una capacidad de memoria
+  representada en un espacio oculto de dimensión $\mathbb{R}^{64}$.
+
+  Calcula y justifica matemáticamente:
+  1. Las dimensiones exactas requeridas para la matriz $W_{hx}$.
+  2. Las dimensiones exactas requeridas para la matriz recurrente
+     $W_{hh}$.
+  3. La dimensión final del vector resultante $h_t$.
+
+
+2.3 Actividad 2.3: La Estrofa Perdida (Pensamiento Lateral)
+───────────────────────────────────────────────────────────
+
+  En el poema original, el vector de sesgo (bias) $b$ apenas se menciona
+  como "un pequeño desvío inevitable". Sabiendo que en álgebra lineal el
+  sesgo permite desplazar la función de activación para evitar que pase
+  rígidamente por el origen, **redacta una estrofa corta** (manteniendo
+  el tono literario del acertijo) que describa de manera exclusiva la
+  función y utilidad del parámetro $b$.

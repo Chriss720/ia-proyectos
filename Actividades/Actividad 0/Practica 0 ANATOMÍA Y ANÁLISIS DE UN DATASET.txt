@@ -1,0 +1,115 @@
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            PRÁCTICA CERO: ANATOMÍA Y ANÁLISIS DE UN DATASET
+
+                            Eduardo Alcaraz
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+Table of Contents
+─────────────────
+
+1. Objetivo
+2. Fase 1: Análisis de Casos (Búsqueda vs. Creación)
+3. Fase 2: Análisis Exploratorio de Datos (EDA) con Python
+4. Fase 3: Entregable y Conclusiones Críticas
+
+
+1 Objetivo
+══════════
+
+  Desarrollar criterio analítico para diferenciar entre la obtención
+  pasiva de datos (búsqueda), la instrumentación activa (creación) y el
+  Análisis Exploratorio de Datos (EDA).
+
+
+2 Fase 1: Análisis de Casos (Búsqueda vs. Creación)
+═══════════════════════════════════════════════════
+
+  Los alumnos deben discutir y contrastar metodologías de obtención de
+  datos mediante dos escenarios de ingeniería.
+
+  • *Escenario A (Búsqueda e Integración):* Se requiere predecir la
+     demanda eléctrica en Michoacán para el próximo mes. Los datos ya
+     existen de forma pública (ej. reportes del CENACE o bases
+     meteorológicas).
+    • /Reto principal:/ Limpieza de datos (data wrangling), alineación
+      de diferentes fuentes (cruzar temperaturas con MW/h), manejo de
+      valores nulos (NaN) y resolución temporal inconsistente.
+  • *Escenario B (Creación e Instrumentación):* Se requiere predecir el
+    comportamiento térmico de una estructura metálica específica
+    mientras es sometida a soldadura o estrés mecánico. No existe un
+    dataset en internet para esta pieza exacta.
+    • /Reto principal:/ Adquisición de señales. Implica seleccionar
+      hardware (termopares), definir la frecuencia de muestreo, lidiar
+      con el ruido electromagnético de la máquina de soldar y asegurar
+      la fidelidad física del dato.
+
+
+3 Fase 2: Análisis Exploratorio de Datos (EDA) con Python
+═════════════════════════════════════════════════════════
+
+  Una vez comprendido el origen, los alumnos deben realizar un "Sanity
+  Check" a un dataset. Se les proporcionará un script base para analizar
+  una serie de tiempo sintética (o real, si ya cuentan con una) antes de
+  siquiera pensar en Keras o PyTorch.
+
+  *Instrucción:* Ejecutar el siguiente script para realizar una
+  inspección estadística y visual de la señal. El alumno debe modificar
+  el código para inyectar anomalías intencionales y ver cómo se reflejan
+  en las métricas.
+
+  ┌────
+  │   import pandas as pd
+  │   import matplotlib.pyplot as plt
+  │   import seaborn as sns
+  │   import numpy as np
+  │ 
+  │   # 1. Generación/Carga de Datos (Simulando un sensor con ruido y tendencia)
+  │   np.random.seed(42)
+  │   # Usamos una ventana de tiempo representativa
+  │   tiempo = pd.date_range(start='2026-04-15', periods=500, freq='T')
+  │   
+  │   # Señal: Tendencia base + oscilación + ruido gaussiano
+  │   valores = np.linspace(10, 50, 500) + np.sin(np.linspace(0, 20, 500))*5 + np.random.normal(0, 2, 500)
+  │   
+  │   df = pd.DataFrame({'Timestamp': tiempo, 'Lectura': valores})
+  │   df.set_index('Timestamp', inplace=True)
+  │ 
+  │   # 2. Inspección Temporal (¿Hay valores atípicos o estacionalidad?)
+  │   plt.figure(figsize=(10, 4))
+  │   plt.plot(df.index, df['Lectura'], label='Señal Cruda del Sensor', color='#2ca02c')
+  │   plt.title("Inspección Visual de la Serie de Tiempo")
+  │   plt.xlabel("Tiempo")
+  │   plt.ylabel("Amplitud")
+  │   plt.grid(True)
+  │   plt.show()
+  │ 
+  │   # 3. Análisis de Distribución (¿El ruido es normal?)
+  │   plt.figure(figsize=(6, 4))
+  │   sns.histplot(df['Lectura'], kde=True, bins=30)
+  │   plt.title("Histograma y Densidad de las Lecturas")
+  │   plt.show()
+  │ 
+  │   # 4. Estadística Descriptiva (El perfil del dataset)
+  │   print("=== Perfil Estadístico del Dataset ===")
+  │   print(df.describe())
+  └────
+
+
+4 Fase 3: Entregable y Conclusiones Críticas
+════════════════════════════════════════════
+
+  Basándose en la ejecución del código y el análisis de las gráficas, el
+  alumno debe redactar un reporte en su entorno de trabajo (Jupyter)
+  respondiendo:
+
+  1. Observando la gráfica temporal: ¿La serie de tiempo es estacionaria
+     (su media y varianza son constantes)? ¿Por qué esto es un factor
+     crítico antes de entrenar un modelo predictivo?
+  2. En el mundo real, si tú hubieras construido el circuito para
+     capturar este dataset (Escenario B), ¿qué factores físicos del
+     entorno podrían generar "picos" atípicos (outliers) en las
+     lecturas?
+  3. ¿Qué riesgos corremos como ingenieros si saltamos esta fase de
+     análisis y conectamos directamente estos datos crudos a una Red
+     Neuronal?
